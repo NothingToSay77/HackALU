@@ -1,0 +1,22 @@
+CHIP Xor16bit
+{
+ IN X[16],Y;
+ OUT Z[16];
+ PARTS:
+ Xor(a=X[15],b=Y,out=Z[15]);
+ Xor(a=X[14],b=Y,out=Z[14]);
+ Xor(a=X[13],b=Y,out=Z[13]);
+ Xor(a=X[12],b=Y,out=Z[12]);
+ Xor(a=X[11],b=Y,out=Z[11]);
+ Xor(a=X[10],b=Y,out=Z[10]);
+ Xor(a=X[9],b=Y,out=Z[9]);
+ Xor(a=X[8],b=Y,out=Z[8]);
+ Xor(a=X[7],b=Y,out=Z[7]);
+ Xor(a=X[6],b=Y,out=Z[6]);
+ Xor(a=X[5],b=Y,out=Z[5]);
+ Xor(a=X[4],b=Y,out=Z[4]);
+ Xor(a=X[3],b=Y,out=Z[3]);
+ Xor(a=X[2],b=Y,out=Z[2]);
+ Xor(a=X[1],b=Y,out=Z[1]);
+ Xor(a=X[0],b=Y,out=Z[0]);
+}

@@ -1,0 +1,15 @@
+CHIP HackALU
+{
+	IN x[16],y[16],zx,nx,zy,ny,f,no;
+	OUT Out[16],zr,ng;
+	PARTS:
+	bit162to1mux(X=x,Y[0..15]=false,S0=zx,Z=temp1);
+	bit162to1mux(X=y,Y[0..15]=false,S0=zy,Z=temp2);
+	Xor16bit(X=temp1,Y=nx,Z=p);
+	Xor16bit(X=temp2,Y=ny,Z=q);
+	bit16CLAadderSubtractorsigned(X=p,Y=q,AorS=false,SUM=temp3);
+	And16bit(X=p,Y=q,Z=temp4);
+	bit162to1mux(X=temp4,Y=temp3,S0=f,Z=r);
+	Xor16bit(X=r,Y=no,Z=Out,Z=temp,Z[15]=ng);
+	comparator(x=temp,y[0..15]=false,z=zr);
+}

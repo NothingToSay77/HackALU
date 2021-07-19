@@ -1,0 +1,19 @@
+/*Without using higher generate terms*/
+CHIP bit16CLAadderSubtractorunsigned
+  {IN X[16],Y[16],AorS;
+  //AorS=0 for addition and 1 for subtraction
+  OUT SUM[16],Overflow;
+  PARTS:
+  Xorwith(AorS=AorS,Y=Y[0..3],newY=part1);
+  Xorwith(AorS=AorS,Y=Y[4..7],newY=part2);
+  Xorwith(AorS=AorS,Y=Y[8..11],newY=part3);
+  Xorwith(AorS=AorS,Y=Y[12..15],newY=part4);
+  bit4CLA(X=X[0..3],Y=part1,C0=AorS,SUM=SUM[0..3],C4=C4);
+  bit4CLA(X=X[4..7],Y=part2,C0=C4,SUM=SUM[4..7],C4=C8);
+  bit4CLA(X=X[8..11],Y=part3,C0=C8,SUM=SUM[8..11],C4=C12);
+  bit4CLA(X=X[12..15],Y=part4,C0=C12,SUM=SUM[12..15],C4=C16);
+  /*Since we dont check for overflow in the case of subtraction*/
+  /*We make overrflow bit 0 always by taking and with not AorS*/
+  Not(in=AorS,out=notAorS);
+  And(a=notAorS,b=C16,out=Overflow);
+  }
